@@ -1,0 +1,74 @@
+<div class="container">
+
+    <div class="col-md-12">
+        <h1>User List</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Userame</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Age</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.age}}</td>
+
+                    <td>
+                        <button class="btn btn-info" (click)="showEditUserForm(user)">
+               
+                <i class="fa fa-edit"></i>
+              </button>
+                        <button class="btn btn-danger" (click)="removeUser(user)">
+                       <i class="fa fa-minus"></i>
+            </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-success" (click)="showAddUserForm()">
+  <i class="fa fa-plus"></i></button>
+        <br />
+        <br />
+
+        <form *ngIf="userForm" name='userForm'>
+            <div class="form-group">
+                <h2>Add New User</h2>
+                <p>ID: <input [(ngModel)]="newUser.id" class="form-control" type="text" name="id" /></p>
+                <p class="error" ng-if="!userForm.username.$valid" style="color:red; font-size: 10px;">Username must be 20 characters or less and does not allow special characters</p>
+                <p>Username: <input [(ngModel)]="newUser.username" class="form-control" type="text" name="username" ng-maxlength="20" required /></p>
+                <p>Email: <input [(ngModel)]="newUser.email" class="form-control" type="email" name="email" required/></p>
+
+                <p>Age: <input [(ngModel)]="newUser.age" class="form-control" type="number" name="age" required max='100' min='1' /></p>
+                <span class='help-block' ng-show='clientForm.age.$error.min' style="color:red; font-size: 10px;">Age should be greater than 1</span>
+                <span class='help-block' ng-show='clientForm.age.$error.max' style="color:red; font-size: 10px;">Age should be less than 100</span>
+
+                <p>
+                    <button type="button" class="btn btn-primary" (click)="saveUser(newUser)">Submit</button>
+                    <button (click)="cancelNewUser()" type="button" class="btn btn-warning">Cancel</button>
+                </p>
+            </div>
+        </form>
+
+
+
+        <form class="form-group" *ngIf="editUserForm">
+            <h2>Edit User</h2>
+            <p>ID: <input [(ngModel)]="editedUser.id" class="form-control" type="text" name="id" /></p>
+            <p>Username: <input [(ngModel)]="editedUser.username" class="form-control" type="text" name="username" /></p>
+            <p>Email: <input [(ngModel)]="editedUser.email" class="form-control" type="email" name="email" /></p>
+            <p>Age: <input [(ngModel)]="editedUser.age" class="form-control" type="number" name="age" /></p>
+            <p>
+                <button type="button" class="btn btn-primary" (click)="updateUser(editedUser)">Submit</button>
+                <button (click)="cancelEdits()" type="button" class="btn btn-warning">Cancel</button>
+            </p>
+        </form>
+
+    </div>
+</div>
