@@ -16,4 +16,4 @@
 ### Features
 - navbar
 - routing setup
-- app.template  -> loads navbar and **RouterOutlet** for **Home Component**
+- app.template  -> loads navbar and **RouterOutlet** for **Home Component**# simple-crud
